@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # # limitations under the License.
 
-from CatchException.mail_sender import SuccessMail, ExceptionMail
+from CatchException.mail_sender import SuccessMail, ExceptionMail, SendMail
 
 
-__all__ = ['SuccessMail', 'ExceptionMail']
+__all__ = ['SuccessMail', 'ExceptionMail', 'SendMail']
 __version__ = "0.1.0"
 __author__ = "MinWoo Park <parkminwoo1991@gmail.com>"

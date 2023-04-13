@@ -40,6 +40,7 @@ class ExceptionMail(BaseException):
         smtp.sendmail(heydudenoticer['FROM'], heydudenoticer['TO'], heydudenoticer['ALL'])
         smtp.quit()
 
+
 class SuccessMail:
     def __init__(self) -> None:
         pass
@@ -50,13 +51,31 @@ class SuccessMail:
         smtp = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
         smtp.login(gmail_sender, gmail_app_password_of_sender)
         message = EmailMessage()
-        message.set_content("Hi there, \n\nI just wanted to let you know that your Python code has run successfully without any exceptions. \n\n - Python Code Status: Done. \n - Detail: Python Code Ran Without Exceptions.\n\nAll the best, \nMinwoo Park https://github.com/dsdanielpark")
+        message.set_content("Hi there, \n\nI just wanted to let you know that your Python code has run successfully without any exceptions. \n\n - Python Code Status: Done. \n - Detail: Python Code Ran Without Exceptions. \n\nAll the best, \nCatchException https://github.com/dsdanielpark/CatchException")
         message["Subject"] = "Success! Python Code Executed Successfully"
         message["From"] = gmail_sender
         message["To"] = gmail_receiver
         smtp.send_message(message)
         smtp.quit()
- 
+
+
+class SendMail:
+    def __init__(self) -> None:
+        pass
+        
+    def __call__(self, *args, **kwds) -> None:
+        SMTP_SERVER = 'smtp.gmail.com'
+        SMTP_PORT = 465
+        smtp = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
+        smtp.login(gmail_sender, gmail_app_password_of_sender)
+        message = EmailMessage()
+        message.set_content("Hi there, \n\nThe code has reached the line where you requested an email to be sent. As per your instruction, we are sending this email. \n\nAll the best, \nCatchException https://github.com/dsdanielpark/CatchException")
+        message["Subject"] = "Notice! Code Execution Reached Specified Line"
+        message["From"] = gmail_sender
+        message["To"] = gmail_receiver
+        smtp.send_message(message)
+        smtp.quit()
+
 
 
 
@@ -87,7 +106,8 @@ if __name__ == '__main__':
 
     try:
         # 02. Locate your code.
-        print(1/0)             
+        print(1/0)      
+        SuccessMail().__call__()          
 
 
     # 03-a. Mail Sent: When strike exception
