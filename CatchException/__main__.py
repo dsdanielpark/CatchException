@@ -1,7 +1,7 @@
 import argparse
 import subprocess
 
-from exceptcatch import (chime_sender,
+from CatchException import (chime_sender,
                         desktop_sender,
                         dingtalk_sender,
                         discord_sender,

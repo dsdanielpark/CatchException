@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # # limitations under the License.
 
-from exceptcatch.mail_sender import SuccessMail, ExceptionMail
+from CatchException.mail_sender import SuccessMail, ExceptionMail
 
 
 __all__ = ['SuccessMail', 'ExceptionMail']
