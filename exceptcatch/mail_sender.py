@@ -82,7 +82,7 @@ if __name__ == '__main__':
     global gmail_receiver, gmail_sender, gmail_app_password_of_sender
     gmail_receiver = 'parkminwoo1991@gmail.com'
     gmail_sender = 'heydudenotice@gmail.com'
-    gmail_app_password_of_sender = 'mpxssbxqlauglqiz'
+    gmail_app_password_of_sender = 'xxxxxxxxxxx'
     sys.excepthook = ExceptionMail.__call__
 
     try:
