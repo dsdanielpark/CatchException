@@ -12,7 +12,6 @@ Development Status :: 3 - Alpha <br>
 
 In preparation for the beta release, the package architecture is overhauled. Test by refactoring with some extensibility open. Applies to ExceptNotifier after QA.
 
-<br>
 
 # Install
 ```
