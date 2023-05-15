@@ -2,14 +2,19 @@
 __pycache__/
 *.py[cod]
 *$py.class
+build
+
+!notebooks/kakao/Generate_Token.ipynb
 notebooks
+docs_1/
+docs1/
+
 
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -128,3 +133,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+tutorials/token.json
+test.py
+test.py
+ipyhton_test.ipynb
+ipy_unit_test.ipynb

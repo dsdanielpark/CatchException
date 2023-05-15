@@ -1,0 +1,31 @@
+package:
+  name: "exceptnotifier"
+  version: "0.2.11"
+
+source:
+  git_url: https://github.com/dsdanielpark/ExceptNotifier
+
+requirements:
+  host:
+    - python
+    - setuptools
+  build:
+    - python
+  run:
+    - python
+    - jupyter
+    - ipykernel
+    - requests
+
+
+
+about:
+  home: https://github.com/dsdanielpark/ExceptNotifier
+  license: MIT
+  license_familY: MIT
+  license_file: LICENSE
+  summary: Integrates AI-assisted debugging notifications into Python try-except statements for various messaging applications."
+
+extra:
+  recipe-maintainers:
+    - dsdanielpark
