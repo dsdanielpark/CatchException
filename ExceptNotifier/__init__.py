@@ -12,8 +12,8 @@ from ExceptNotifier.base.teams_sender import send_teams_msg
 from ExceptNotifier.base.whatsapp_sender import send_whatsapp_msg
 from ExceptNotifier.base.sms_sender import send_sms_msg
 from ExceptNotifier.base.beep_sender import beep
-from ExceptNotifier.base.openai_receiver import receive_openai_advice
-from ExceptNotifier.base.openai_receiver import get_resp_openai_advice
+from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
+from ExceptNotifier.aicore.openai_receiver import get_resp_openai_advice
 from ExceptNotifier.base.wechat_sender import send_wechat_msg
 from ExceptNotifier.base.desktop_sender import send_desktop_msg
 from ExceptNotifier.pycore.mail_notifier import SuccessMail, ExceptMail, SendMail
@@ -57,7 +57,7 @@ from ExceptNotifier.ipycore.wechat_notifier_ipython import ExceptWechatIpython
 from ExceptNotifier.ipycore.beep_notifier_ipython import ExceptBeepIpython
 from ExceptNotifier.ipycore.desktop_notifier_ipython import ExceptDesktopIpython
 
-from ExceptNotifier.base.bard_receiver import receive_bard_advice
+from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 
 
 __all__ = [

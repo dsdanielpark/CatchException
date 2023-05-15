@@ -7,8 +7,8 @@ from os import environ
 import datetime
 import traceback
 from email.message import EmailMessage
-from ExceptNotifier.base.openai_receiver import receive_openai_advice
-from ExceptNotifier.base.bard_receiver import receive_bard_advice
+from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
+from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 

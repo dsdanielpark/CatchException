@@ -4,8 +4,8 @@ from os import environ
 import datetime
 from IPython.core.ultratb import AutoFormattedTB
 from ExceptNotifier.base.slack_sender import send_slack_msg
-from ExceptNotifier.base.openai_receiver import receive_openai_advice
-from ExceptNotifier.base.bard_receiver import receive_bard_advice
+from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
+from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 

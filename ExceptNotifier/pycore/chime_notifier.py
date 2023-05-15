@@ -8,8 +8,8 @@ import traceback
 from os import environ
 from email.message import EmailMessage
 from ExceptNotifier.base.chime_sender import send_chime_msg
-from ExceptNotifier.base.openai_receiver import receive_openai_advice
-from ExceptNotifier.base.bard_receiver import receive_bard_advice
+from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
+from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 
 http = urllib3.PoolManager()
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"

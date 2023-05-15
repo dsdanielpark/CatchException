@@ -8,8 +8,8 @@ from os import environ
 from twilio.rest import Client
 from email.message import EmailMessage
 from ExceptNotifier.base.sms_sender import send_sms_msg
-from ExceptNotifier.base.openai_receiver import receive_openai_advice
-from ExceptNotifier.base.bard_receiver import receive_bard_advice
+from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
+from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 from base_handler.base_send_handler import BaseSendHandler
 from base_handler.base_success_handler import BaseSuccessHandler
 

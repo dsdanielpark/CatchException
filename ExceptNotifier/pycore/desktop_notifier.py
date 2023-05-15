@@ -7,8 +7,8 @@ from os import environ
 from plyer import notification
 from email.message import EmailMessage
 from ExceptNotifier.base.desktop_sender import send_desktop_msg
-from ExceptNotifier.base.openai_receiver import receive_openai_advice
-from ExceptNotifier.base.bard_receiver import receive_bard_advice
+from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
+from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 

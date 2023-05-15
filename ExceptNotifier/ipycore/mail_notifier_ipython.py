@@ -5,9 +5,9 @@ import smtplib
 import datetime
 from os import environ
 from IPython.core.ultratb import AutoFormattedTB
-from ExceptNotifier.sender.openai_receiver import receive_openai_advice
-from ExceptNotifier.sender.mail_sender import send_gmail_msg
-from ExceptNotifier.sender.bard_receiver import receive_bard_advice
+from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
+from ExceptNotifier.base.mail_sender import send_gmail_msg
+from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
