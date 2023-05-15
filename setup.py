@@ -24,7 +24,7 @@ version = get_version()
 
 
 setup(
-    name="exceptnotifier",
+    name="catchexception",
     version="0.2.11",
     author="daniel park",
     author_email="parkminwoo1991@gmail.com",
