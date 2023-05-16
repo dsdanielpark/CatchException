@@ -2,9 +2,10 @@ Development Status :: Refactoring
 
 # CatchException
 
-> Nightly version of Except Notifier
+> Nightly version of [Except Notifier](https://github.com/dsdanielpark/ExceptNotifier)
 
-In preparation for the beta release, the package architecture is overhauled. Test by refactoring with some extensibility open. Applies to ExceptNotifier after QA.
+In preparation for the beta release, the package architecture is overhauled. Test by refactoring with some extensibility open. <br>
+Applies to [ExceptNotifier](https://github.com/dsdanielpark/ExceptNotifier) after QA.
 
 
 # Remark
