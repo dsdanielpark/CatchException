@@ -1,6 +1,9 @@
 Development Status :: Refactoring
 
 # CatchException
+```
+pip install catchexception
+```
 
 > Nightly version of [Except Notifier](https://github.com/dsdanielpark/ExceptNotifier)
 
