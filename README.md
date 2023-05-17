@@ -5,7 +5,11 @@ Development Status :: Refactoring
 pip install catchexception
 ```
 
-> Nightly version of [Except Notifier](https://github.com/dsdanielpark/ExceptNotifier)
+```
+pip install git+https://github.com/dsdanielpark/catchexception.git
+```
+
+> Nightly version of [Except Notifier](https://github.com/dsdanielpark/ExceptNotifier) for refactoring
 
 In preparation for the beta release, the package architecture is overhauled. Test by refactoring with some extensibility open. <br>
 Applies to [ExceptNotifier](https://github.com/dsdanielpark/ExceptNotifier) after QA.
