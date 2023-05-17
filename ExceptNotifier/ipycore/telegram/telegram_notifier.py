@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 from os import environ
 from ExceptNotifier.base.telegram_sender import send_telegram_msg
 from ExceptNotifier.aicore.openai_receiver import receive_openai_advice

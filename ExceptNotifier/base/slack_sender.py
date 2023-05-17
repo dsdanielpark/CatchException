@@ -1,5 +1,3 @@
-# Copyright 2023 parkminwoo
-
 import requests
 from requests import Response
 

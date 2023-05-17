@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 import re
 import datetime
 import traceback

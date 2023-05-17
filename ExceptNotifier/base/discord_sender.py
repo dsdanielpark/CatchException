@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 
 
 def send_discord_msg(discord_webhook_url: str, msg: str) -> dict:

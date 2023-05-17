@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 from ExceptNotifier.ipycore.telegram.telegram_notifier import (
     ExceptTelegramIpython,
 )

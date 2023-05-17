@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 import re
 import json
 import urllib3

@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Copyright 2023 parkminwoo
-
 import json
 import requests
 from requests import Response

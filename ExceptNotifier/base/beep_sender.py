@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 from os import system
 import platform
 

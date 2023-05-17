@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 import openai
 from os import environ
 

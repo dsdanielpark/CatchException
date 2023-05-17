@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# Copyright 2023 parkminwoo
 from os import environ
 import datetime
 from IPython.core.ultratb import AutoFormattedTB

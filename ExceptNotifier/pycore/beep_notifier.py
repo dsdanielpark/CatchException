@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 import platform
 from os import environ
 from os import system

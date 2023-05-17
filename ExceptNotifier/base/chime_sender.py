@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 import urllib3
 import json
 from urllib3 import BaseHTTPResponse

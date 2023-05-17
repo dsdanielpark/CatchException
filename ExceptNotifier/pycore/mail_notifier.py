@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2023 parkminwoo
 import re
-import os
 import smtplib
 from os import environ
 import datetime

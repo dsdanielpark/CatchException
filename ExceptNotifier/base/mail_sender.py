@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 import smtplib
 from email.message import EmailMessage
 

@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 import datetime
 from IPython.core.ultratb import AutoFormattedTB
 

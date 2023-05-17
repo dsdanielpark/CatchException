@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 from plyer import notification
 
 

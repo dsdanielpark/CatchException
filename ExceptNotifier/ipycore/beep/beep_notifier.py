@@ -1,4 +1,3 @@
-# Copyright 2023 parkminwoo
 from ExceptNotifier.ipycore.base_handler.base_exception import BaseExceptionIpython
 from ExceptNotifier.base.beep_sender import beep
 
