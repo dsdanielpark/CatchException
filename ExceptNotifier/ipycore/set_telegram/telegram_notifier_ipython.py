@@ -5,6 +5,7 @@ from ExceptNotifier.aicore.openai_receiver import receive_openai_advice
 from ExceptNotifier.aicore.bard_receiver import receive_bard_advice
 from ExceptNotifier.ipycore.base_handler.base_exception import BaseExceptionIpython
 from ExceptNotifier.ipycore.stacker.error_stacker import stack_error_msg
+
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
@@ -26,20 +27,24 @@ class ExceptTelegramIpython(BaseExceptionIpython):
         :type tb_offset: int, optional
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
-        data = stack_error_msg(etype, evalue, tb, 'telegram')
+        data = stack_error_msg(etype, evalue, tb, "telegram")
         send_telegram_msg(environ["_TELEGRAM_TOKEN"], data["text"])
 
         if environ.get("_OPEN_AI_API") is not None:
             try:
                 advice_msg = receive_openai_advice(
-                    environ["_OPEN_AI_MODEL"], environ["_OPEN_AI_API"], data['error_message']
+                    environ["_OPEN_AI_MODEL"],
+                    environ["_OPEN_AI_API"],
+                    data["error_message"],
                 )
                 send_telegram_msg(environ["_TELEGRAM_TOKEN"], advice_msg)
             except Exception as e:
                 pass
         if environ.get("_BARD_API_KEY") is not None:
             try:
-                advice_msg = receive_bard_advice(environ["_BARD_API_KEY"], data['error_message'])
+                advice_msg = receive_bard_advice(
+                    environ["_BARD_API_KEY"], data["error_message"]
+                )
                 send_telegram_msg(environ["_TELEGRAM_TOKEN"], advice_msg)
             except Exception as e:
                 pass

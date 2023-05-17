@@ -138,8 +138,7 @@ class ExceptKakao(BaseException):
 
 
 class SuccessKakao:
-    """Sending success message to Kakaotalk
-    """
+    """Sending success message to Kakaotalk"""
 
     def __init__(self) -> None:
         pass
@@ -161,8 +160,7 @@ class SuccessKakao:
 
 
 class SendKakao:
-    """Sending message to Kakaotalk
-    """
+    """Sending message to Kakaotalk"""
 
     def __init__(self) -> None:
         pass

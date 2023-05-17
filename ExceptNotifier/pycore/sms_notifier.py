@@ -159,8 +159,7 @@ class ExceptSMS(BaseException):
 
 
 class SuccessSMS(BaseSuccessHandler):
-    """Sending success message to SMS
-    """
+    """Sending success message to SMS"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
@@ -177,8 +176,7 @@ class SuccessSMS(BaseSuccessHandler):
 
 
 class SendSMS(BaseSendHandler):
-    """Sending message to SMS
-    """
+    """Sending message to SMS"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)

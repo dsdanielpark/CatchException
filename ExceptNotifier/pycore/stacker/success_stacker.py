@@ -1,11 +1,13 @@
 import datetime
+
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
 
 def stack_success_msg(app_name):
     success_message = dict()
     start_time = datetime.datetime.now()
     f"Time Stamp: {start_time.strftime(DATE_FORMAT)}"
-    if app_name in ['telegram']:
+    if app_name in ["telegram"]:
         success_message = {
             "SUBJECT": "[Success Notifier] 🎉 Success! Python Code Executed Successfully"
         }

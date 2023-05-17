@@ -9,12 +9,12 @@ def stack_error_msg(etype, value, tb, app_name):
         "(<(type|class ')|'exceptions.|'>|__main__.)", "", str(etype)
     ).strip()
     start_time = datetime.datetime.now()
-    if app_name in ['telegram']:
+    if app_name in ["telegram"]:
         stacked_message = {
             "SUBJECT": "[Except Notifier] ⚠️ Error! Python Code Exception Detected",
             "BODY": f"\n\nIMPORTANT WARNING \nPython Exception Detected in Your Code. \n\nHi there, \nThis is an exception catch notifier. \n\n - ☑️ Code Status: Fail.🛠 \n - ☑️ Detail: Python Code Ran Exceptions. \n - 🕐 Time: {start_time.strftime(DATE_FORMAT)} \n\n ⛔️ {excType}: %{etype.__doc__}\n\n {value} \n\n",
         }
-    elif app_name in ['gmail']:
+    elif app_name in ["gmail"]:
         stacked_message = {
             "TO": environ["_GAMIL_RECIPIENT_ADDR"],
             "FROM": environ["_GMAIL_SENDER_ADDR"],
@@ -52,8 +52,10 @@ def stack_error_msg(etype, value, tb, app_name):
             except:
                 stacked_message["BODY"] += "<ERROR WHILE PRINTING VALUE>"
     data = {"text": stacked_message["SUBJECT"] + stacked_message["BODY"]}
-    data['error_message'] = f"error_type=={excType} error_type_document=={etype.__doc__} error_value=={value} stack infomation=={stack} code name=={frame.f_code.co_name}file name=={frame.f_code.co_filename} file_number=={frame.f_lineno}"
-    data['advice_msg'] = '\tFile: "%s"\n\t\t%s %s: %s\n' % (
+    data[
+        "error_message"
+    ] = f"error_type=={excType} error_type_document=={etype.__doc__} error_value=={value} stack infomation=={stack} code name=={frame.f_code.co_name}file name=={frame.f_code.co_filename} file_number=={frame.f_lineno}"
+    data["advice_msg"] = '\tFile: "%s"\n\t\t%s %s: %s\n' % (
         line[0],
         line[2],
         line[1],

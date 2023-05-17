@@ -127,8 +127,7 @@ class ExceptChime(BaseException):
 
 
 class SuccessChime:
-    """Sending success message to AWS Chime
-    """
+    """Sending success message to AWS Chime"""
 
     def __init__(self) -> None:
         pass
@@ -150,8 +149,7 @@ class SuccessChime:
 
 
 class SendChime:
-    """Sending message to AWS Chime
-    """
+    """Sending message to AWS Chime"""
 
     def __init__(self) -> None:
         pass

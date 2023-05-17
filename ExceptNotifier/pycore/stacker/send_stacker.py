@@ -1,11 +1,13 @@
 import datetime
+
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
 
 def stack_send_msg(app_name):
     send_message = dict()
     start_time = datetime.datetime.now()
     f"Time Stamp: {start_time.strftime(DATE_FORMAT)}"
-    if app_name in ['telegram']:
+    if app_name in ["telegram"]:
         send_message = {
             "SUBJECT": "[Codeline Notifier] 👏 Notice! Code Execution Reached Specified Line"
         }

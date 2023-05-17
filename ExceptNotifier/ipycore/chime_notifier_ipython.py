@@ -10,10 +10,7 @@ from ExceptNotifier.ipycore.base_handler.base_exception import BaseExceptionIpyt
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
-
 class ExceptChimeIpython(BaseExceptionIpython):
-
-        
     def custom_exc(
         shell: object, etype: object, evalue: object, tb: object, tb_offset=1
     ) -> None:
@@ -35,7 +32,7 @@ class ExceptChimeIpython(BaseExceptionIpython):
         stb = itb.structured_traceback(etype, evalue, tb)
         sstb = itb.stb2text(stb)
         start_time = datetime.datetime.now()
-        
+
         error_message = f"error sheel=={shell}, error_type_document=={etype.__doc__}, error_value=={evalue}, error message in ipython cell=={sstb}"
         data = {
             "text": f"[Except Notifier] :warning: Error! Python Code Exception Detected \n\nIMPORTANT WARNING \nPython Exception Detected in Your Code. \n\nHi there, \nThis is an exception catch notifier. \n\n - :x: Code Status: Fail. \n - :x: Detail: Python Code Ran Exceptions. \n - :clock2: Time: {start_time.strftime(DATE_FORMAT)} \n\n :no_entry:  {sstb}"
@@ -54,7 +51,9 @@ class ExceptChimeIpython(BaseExceptionIpython):
         if environ.get("_BARD_API_KEY") is not None:
             try:
                 error_message = f"error sheel=={shell}, error_type_document=={etype.__doc__}, error_value=={evalue}, error message in ipython cell=={sstb}"
-                advice_msg = receive_bard_advice(environ["_BARD_API_KEY"], error_message)
+                advice_msg = receive_bard_advice(
+                    environ["_BARD_API_KEY"], error_message
+                )
                 send_chime_msg(environ["_CHIME_WEBHOOK_URL"], advice_msg)
 
             except Exception as e:

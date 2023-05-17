@@ -7,10 +7,9 @@ from os import environ
 
 
 class SuccessTelegram(BaseSuccessHandler):
-    """Sending success message to telegram
-    """
+    """Sending success message to telegram"""
+
     def __call__(self, *args: Any, **kwds: Any) -> Any:
-        data = stack_success_msg('telegram')
-        send_telegram_msg(environ["_TELEGRAM_TOKEN"],data["text"])
+        data = stack_success_msg("telegram")
+        send_telegram_msg(environ["_TELEGRAM_TOKEN"], data["text"])
         return super().__call__(*args, **kwds)
-    

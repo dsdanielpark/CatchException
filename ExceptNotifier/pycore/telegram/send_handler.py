@@ -7,10 +7,9 @@ from os import environ
 
 
 class SendTelegram(BaseSendHandler):
-    """Sending send message to telegram
-    """
+    """Sending send message to telegram"""
+
     def __call__(self, *args: Any, **kwds: Any) -> Any:
-        data = stack_send_msg('telegram')
-        send_telegram_msg(environ["_TELEGRAM_TOKEN"],data["text"])
+        data = stack_send_msg("telegram")
+        send_telegram_msg(environ["_TELEGRAM_TOKEN"], data["text"])
         return super().__call__(*args, **kwds)
-    
