@@ -7,6 +7,6 @@ class BaseExceptionIpython(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def custom_exc(self, *args: Any, **kwds: Any) -> Any:
-        """Application sends a exception message."""
+    def custom_exc(self, *args: Any, **kwargs: Any) -> Any:
+        """Application sends exception message."""
         pass

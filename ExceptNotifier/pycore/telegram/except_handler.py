@@ -9,7 +9,7 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 class ExceptTelegram(BaseException):
-    """Override excepthook to send error message to Telegram.
+    """Override exception to send error message to Telegram.
 
     :param etype: Error Type
     :type etype: _type_
@@ -18,7 +18,6 @@ class ExceptTelegram(BaseException):
     :param tb: Traceback Information
     :type tb: _type_
     """
-
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
 
@@ -36,7 +35,9 @@ class ExceptTelegram(BaseException):
                 send_telegram_msg(environ["_TELEGRAM_TOKEN"], openai_advice)
             except Exception as e:
                 print(
-                    "Response error during getting advice from chatGPT \n {e} \n Insufficient variables set to receive debugging info from OpenAI ChatGPT. Set the following 2 variables as global: _OPEN_AI_MODEL,_OPEN_AI_API"
+                    f"Response error during getting advice from chatGPT \n {e} \n "
+                    f"Insufficient variables set to receive debugging info from OpenAI ChatGPT. "
+                    f"Set the following 2 variables as global: _OPEN_AI_MODEL,_OPEN_AI_API"
                 )
         if environ.get("_BARD_API_KEY") is not None:
             try:
@@ -47,5 +48,7 @@ class ExceptTelegram(BaseException):
                 send_telegram_msg(environ["_TELEGRAM_TOKEN"], bard_advice)
             except Exception as e:
                 print(
-                    "Response error during getting advice from Bard \n {e} \n Insufficient variables set to receive debugging info from Google Bard. Set the following 2 variables as global: _BARD_API_KEY,_BARD_ADVICE_LANG"
+                    f"Response error during getting advice from Bard \n {e} \n "
+                    f"Insufficient variables set to receive debugging info from Google Bard. "
+                    f"Set the following 2 variables as global: _BARD_API_KEY,_BARD_ADVICE_LANG"
                 )

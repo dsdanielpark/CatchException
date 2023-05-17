@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2023 parkminwoo
 import re
 import json
@@ -16,7 +15,7 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 class ExceptChime(BaseException):
-    """Override excepthook to send error message to AWS Chime.
+    """Override exception to send error message to AWS Chime.
 
     :param etype: Error Type
     :type etype: _type_

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2023 parkminwoo
-from ExceptNotifier import beep
+from ExceptNotifier.base.beep_sender import beep
 
 
 def ExceptBeepIpython(

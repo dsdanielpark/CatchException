@@ -1,23 +1,25 @@
-# -*- coding: utf-8 -*-
 # Copyright 2023 parkminwoo
 import requests
 import json
 
+from requests import Response
 
-def send_kakao_msg(_KAKAO_TOKEN_PATH: str, msg: str) -> dict:
-    """Send message to chat room through kakaotalk app's REST API.
 
-    :param _KAKAO_TOKEN_PATH: Kakaotalk token path
-    :type _KAKAO_TOKEN_PATH: str
+def send_kakao_msg(kakao_token_path: str, msg: str) -> Response:
+    """
+    Send message to chat room through kakaotalk app's REST API.
+
+    :param kakao_token_path: Kakaotalk token path
+    :type kakao_token_path: str
     :param msg: Message text
     :type msg: str
     :return: Response according to REST API request
     :rtype: dict
     """
-
-    with open(_KAKAO_TOKEN_PATH, "r") as kakao:
+    with open(kakao_token_path, "r") as kakao:
         tokens = json.load(kakao)
-
+        if tokens is None:
+            raise f"Please enter proper kakao token json file path."
     url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
     headers = {"Authorization": "Bearer " + tokens["access_token"]}
     data = {
@@ -28,18 +30,7 @@ def send_kakao_msg(_KAKAO_TOKEN_PATH: str, msg: str) -> dict:
             "mobile_web_url": "https://developers.kakao.com",
         },
     }
-
     data = {"template_object": json.dumps(data)}
     resp = requests.post(url, headers=headers, data=data)
 
     return resp
-
-
-# if __name__ == "__main__":
-#     global _KAKAO_TOKEN_PATH
-#     _KAKAO_TOKEN_PATH = (
-#         r"C:\Users\parkm\Desktop\git\ExceptionNotifier\tutorials\token.json"
-#     )
-#     msg = "Sending Message Test"
-#     resp_status = send_kakao_msg(_KAKAO_TOKEN_PATH, msg)
-#     print(resp_status)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2023 parkminwoo
 import re
 import datetime
@@ -14,7 +13,7 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 class ExceptDesktop(BaseException):
-    """Override excepthook to send error message to Desktop.
+    """Override exception to send error message to Desktop.
 
     :param etype: Error Type
     :type etype: _type_
