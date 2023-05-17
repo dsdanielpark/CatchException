@@ -10,9 +10,10 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 class ExceptTelegramIpython(BaseExceptionIpython):
-    def custom_exc(
-        shell: object, etype: object, evalue: object, tb: object, tb_offset=1
-    ) -> None:
+    def __init__(self):
+        pass
+
+    def custom_exc(self, shell: object, etype: object, evalue: object, tb: object, tb_offset=1) -> None:
         """ExceptNotifier function for overriding custom execute in ipython for sending Telegram.
 
         :param shell: Excecuted shell, ZMQInteractiveShell object.
