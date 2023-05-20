@@ -74,5 +74,12 @@ error_message_template = {
                 "Hi there, \nThis is an exception catch notifier. \n\n"
                 "- Code Status: Fail. \n"
                 "- Detail: Python Code Ran Exceptions. \n",
+    },
+    "whatsapp": {
+        "SUBJECT": "[Except Notifier] ** Error! ** Python Code Exception Detected",
+        "BODY": "IMPORTANT WARNING \nPython Exception Detected in Your Code. \n\n"
+                "Hi there, \nThis is an exception catch notifier. \n\n"
+                "- Code Status: Fail. \n"
+                "- Detail: Python Code Ran Exceptions. \n",
     }
 }

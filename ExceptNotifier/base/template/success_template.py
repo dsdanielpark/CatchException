@@ -59,5 +59,10 @@ success_message_template = {
         "SUBJECT": "[Success Notifier] :tada: Success! Python Code Executed Successfully",
         "BODY": "\n\nHi there, \nThis is a success notifier.\n\n"
                 "- :white_check_mark: Code Status: Success. \n - :white_check_mark: Detail: Python Code Ran Without Exceptions."
+    },
+    "whatsapp": {
+        "SUBJECT": "[Success Notifier] ** Success! ** Python Code Executed Successfully",
+        "BODY": "\n\nHi there, \nThis is a success notifier.\n\n"
+                "- Code Status: Success. \n - Detail: Python Code Ran Without Exceptions."
     }
 }
