@@ -41,7 +41,7 @@ setup(
         "discord",
         "sphinx-rtd-theme",
         "Sphinx",
-        "bardapi", "urllib3"
+        "bardapi", "urllib3", "requests"
     ],
     keywords="Exception, Python, Python Exception Alarm, Error notifications, Customizable notifications, Traceback management, Single line alarm",
     classifiers=[
