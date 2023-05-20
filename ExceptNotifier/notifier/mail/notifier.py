@@ -1,70 +1,71 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.teams.sender import send_teams_msg
 from ExceptNotifier.base.stacker.success_stacker import stack_success_msg
 from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
 from ExceptNotifier.decorators.bard_ai_decorator import handle_bard_if_available
 from ExceptNotifier.decorators.open_ai_decorator import handle_openai_if_available
+from ExceptNotifier.notifier.mail.sender import send_mail_msg
+
 
 from os import environ
 
 
-class SuccessTeams(BaseSuccessHandler):
+class SuccessMail(BaseSuccessHandler):
     """
-    Sends success message to Teams.
+    Sends success message to Mail.
     """
 
     def __call__(self, *args, **kwargs):
         """
-        Sends success message to Teams.
+        Sends success message to Mail.
 
         :param args: Positional arguments
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_teams_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("teams")["text"])
+        send_mail_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("mail")["text"])
         return super().__call__(*args, **kwargs)
 
 
-class SendTeams(BaseSendHandler):
+class SendMail(BaseSendHandler):
     """
-    Sends specific line arrival message to Teams.
+    Sends specific line arrival message to Mail.
     """
 
     def __call__(self, *args, **kwargs):
         """
-        Sends send message to Teams.
+        Sends send message to Mail.
 
         :param args: Positional arguments
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_teams_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("teams")["text"])
+        send_mail_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("mail")["text"])
         return super().__call__(*args, **kwargs)
 
 
-class ExceptTeams(BaseException):
+class ExceptMail(BaseException):
     """
-    Custom exception that sends error message to Teams.
+    Custom exception that sends error message to Mail.
     """
 
     @handle_openai_if_available
     @handle_bard_if_available
     def __call__(self, *args, **kwargs):
         """
-        Sends error message to Teams.
+        Sends error message to Mail.
 
         :param args: Positional arguments
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_teams_msg(
+        send_mail_msg(
             environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="teams")["text"],
+            stack_error_msg(*args, **kwargs, handler_name="mail")["text"],
         )
 
 
-class ExceptTeamsIpython(BaseExceptionIpython):
+class ExceptMailIpython(BaseExceptionIpython):
     def __init__(self):
         super().__init__()
         pass
@@ -74,7 +75,7 @@ class ExceptTeamsIpython(BaseExceptionIpython):
     def custom_exc(
         self, shell: object, etype: object, evalue: object, tb: object, tb_offset=1
     ) -> None:
-        """ExceptNotifier function for overriding custom execute in IPython for sending Teams.
+        """ExceptNotifier function for overriding custom execute in IPython for sending Mail.
 
         :param shell: Executed shell, ZMQInteractiveShell object.
         :type shell: object
@@ -88,7 +89,7 @@ class ExceptTeamsIpython(BaseExceptionIpython):
         :type tb_offset: int, optional
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
-        data = stack_error_msg(etype, evalue, tb, "teams")
-        send_teams_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        data = stack_error_msg(etype, evalue, tb, "mail")
+        send_mail_msg(environ["_TELEGRAM_TOKEN"], data["text"])
 
         return None

@@ -1,5 +1,5 @@
 import sys
-from ExceptNotifier.chime import ExceptChimeIpython, ExceptChime
+from ExceptNotifier.notifier.chime import ExceptChimeIpython, ExceptChime
 
 except_chime = ExceptChimeIpython()
 

@@ -1,5 +1,5 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.whatsapp.sender import send_whatsapp_msg
+from ExceptNotifier.notifier.teams.sender import send_teams_msg
 from ExceptNotifier.base.stacker.success_stacker import stack_success_msg
 from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
@@ -9,62 +9,62 @@ from ExceptNotifier.decorators.open_ai_decorator import handle_openai_if_availab
 from os import environ
 
 
-class SuccessWhatsapp(BaseSuccessHandler):
+class SuccessTeams(BaseSuccessHandler):
     """
-    Sends success message to Whatsapp.
+    Sends success message to Teams.
     """
 
     def __call__(self, *args, **kwargs):
         """
-        Sends success message to Whatsapp.
+        Sends success message to Teams.
 
         :param args: Positional arguments
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_whatsapp_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("whatsapp")["text"])
+        send_teams_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("teams")["text"])
         return super().__call__(*args, **kwargs)
 
 
-class SendWhatsapp(BaseSendHandler):
+class SendTeams(BaseSendHandler):
     """
-   Sends specific line arrival message to Whatsapp.
+    Sends specific line arrival message to Teams.
     """
 
     def __call__(self, *args, **kwargs):
         """
-       Sends specific line arrival message to Whatsapp.
+        Sends send message to Teams.
 
         :param args: Positional arguments
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_whatsapp_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("whatsapp")["text"])
+        send_teams_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("teams")["text"])
         return super().__call__(*args, **kwargs)
 
 
-class ExceptWhatsapp(BaseException):
+class ExceptTeams(BaseException):
     """
-    Custom exception that sends error message to Whatsapp.
+    Custom exception that sends error message to Teams.
     """
 
     @handle_openai_if_available
     @handle_bard_if_available
     def __call__(self, *args, **kwargs):
         """
-        Sends error message to Whatsapp.
+        Sends error message to Teams.
 
         :param args: Positional arguments
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_whatsapp_msg(
+        send_teams_msg(
             environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="whatsapp")["text"],
+            stack_error_msg(*args, **kwargs, handler_name="teams")["text"],
         )
 
 
-class ExceptWhatsappIpython(BaseExceptionIpython):
+class ExceptTeamsIpython(BaseExceptionIpython):
     def __init__(self):
         super().__init__()
         pass
@@ -74,7 +74,7 @@ class ExceptWhatsappIpython(BaseExceptionIpython):
     def custom_exc(
         self, shell: object, etype: object, evalue: object, tb: object, tb_offset=1
     ) -> None:
-        """ExceptNotifier function for overriding custom execute in IPython for sending Whatsapp.
+        """ExceptNotifier function for overriding custom execute in IPython for sending Teams.
 
         :param shell: Executed shell, ZMQInteractiveShell object.
         :type shell: object
@@ -88,7 +88,7 @@ class ExceptWhatsappIpython(BaseExceptionIpython):
         :type tb_offset: int, optional
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
-        data = stack_error_msg(etype, evalue, tb, "whatsapp")
-        send_whatsapp_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        data = stack_error_msg(etype, evalue, tb, "teams")
+        send_teams_msg(environ["_TELEGRAM_TOKEN"], data["text"])
 
         return None

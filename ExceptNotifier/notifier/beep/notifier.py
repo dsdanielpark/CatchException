@@ -1,5 +1,5 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.beep.sender import beep
+from ExceptNotifier.notifier.beep.sender import beep
 
 class SuccessBeep(BaseSuccessHandler):
     """

@@ -4,7 +4,7 @@ from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
 from ExceptNotifier.decorators.bard_ai_decorator import handle_bard_if_available
 from ExceptNotifier.decorators.open_ai_decorator import handle_openai_if_available
-from ExceptNotifier.slack.sender import send_slack_msg
+from ExceptNotifier.notifier.slack.sender import send_slack_msg
 
 
 from os import environ
