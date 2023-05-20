@@ -1,18 +1,14 @@
-# -*- coding: utf-8 -*-
-# Copyright 2023 parkminwoo
 from os import system
 import platform
 
 
 def beep(sec=1, freq=1000) -> None:
-    """Make beep sound
-
-    :param sec: Beep duration, defaults to 1
-    :type sec: int, optional
-    :param freq: Beep fequency, defaults to 1000
-    :type freq: int, optional
     """
+    Make beep sound.
 
+    :param sec: Beep duration in seconds (default is 1).
+    :param freq: Beep frequency in Hz (default is 1000).
+    """
     sys = platform.system()
 
     if sys == "Windows":

@@ -4,7 +4,7 @@ import json
 from requests import Response
 
 
-def send_kakaotalk_msg(kakao_token_path: str, msg: str) -> Response:
+def send_line_msg(kakao_token_path: str, msg: str) -> Response:
     """
     Send a message to a chat room through KakaoTalk app's REST API.
 

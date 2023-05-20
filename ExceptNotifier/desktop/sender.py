@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-# Copyright 2023 parkminwoo
 from plyer import notification
 
-
 def send_desktop_msg(title_msg: str, body_msg: str, DISP_TIME=5) -> None:
-    """Sending notification to desktop
+    """
+    Sending notification to desktop
 
     :param title_msg: Title of message
     :type title_msg: str
