@@ -3,79 +3,7 @@ from ExceptNotifier.base.utils.message_generator import generate_message
 from email.message import EmailMessage
 from os import environ
 from typing import Optional
-
-
-
-send_message_dict = {
-    "telegram": {
-        "SUBJECT": "[Codeline Notifier] 👏 Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "gmail": {
-        "SUBJECT": "[Codeline Notifier] Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- Code Status: Done.\n"
-                "- Detail: Code Execution Reached Specified Line.\n"
-    },
-    "kakaotalk": {
-        "SUBJECT": "[Codeline Notifier] ** Notice! ** Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- Code Status: Done.\n"
-                "- Detail: Code Execution Reached Specified Line.\n"
-    },
-    "chime": {
-        "SUBJECT": "[Codeline Notifier] :clap: Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "discord": {
-        "SUBJECT": "[Codeline Notifier] :clap: Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "slack": {
-        "SUBJECT": "[Codeline Notifier] :clap: Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "desktop": {
-        "SUBJECT": "[Codeline Notifier] :clap: Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "line": {
-        "SUBJECT": "[Codeline Notifier] :clap: Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "teams": {
-        "SUBJECT": "[Codeline Notifier] :clap: Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "wechat": {
-        "SUBJECT": "[Codeline Notifier] :clap: Notice! Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- ✅ Code Status: Done.\n"
-                "- ✅ Detail: Code Execution Reached Specified Line.\n"
-    },
-    "sms": {
-        "SUBJECT": "[Codeline Notifier] ** Notice! ** Code Execution Reached Specified Line",
-        "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"
-                "- Code Status: Done.\n"
-                "- Detail: Code Execution Reached Specified Line.\n"
-    }
-}
-
-
+from ExceptNotifier.base.template.send_template import send_message_template as sendmsgtemplate
 
 
 def stack_send_msg(app_name: str) -> Optional[EmailMessage]:
@@ -91,7 +19,7 @@ def stack_send_msg(app_name: str) -> Optional[EmailMessage]:
     start_time = get_timestamp()
 
 
-    send_message = send_message_dict.get(app_name)
+    send_message = sendmsgtemplate.get(app_name)
     if send_message is None:
         return None
 

@@ -2,13 +2,14 @@ import traceback
 from email.message import EmailMessage
 from os import environ
 from ExceptNotifier.base.utils.time_stamper import get_timestamp
+from ExceptNotifier.base.template.error_template import error_message_template as errormsgtemplate
 
 
 def stack_error_msg(etype, value, tb, app_name):
     exc_type = str(etype).strip("'<>() ").split()[1]
     start_time = get_timestamp()
 
-    message_dict = APP_MESSAGES.get(app_name)
+    message_dict = errormsgtemplate.get(app_name)
     if message_dict is None:
         return None
 
