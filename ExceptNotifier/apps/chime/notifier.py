@@ -1,5 +1,5 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.chime.sender import send_chime_msg
+from ExceptNotifier.apps.chime.sender import send_chime_msg
 from ExceptNotifier.base.stacker.success_stacker import stack_success_msg
 from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
@@ -22,7 +22,7 @@ class SuccessChime(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_chime_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("chime")["text"])
+        send_chime_msg(environ["_CHIME_WEBHOOK_URL"], stack_success_msg("chime")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -39,7 +39,7 @@ class SendChime(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_chime_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("chime")["text"])
+        send_chime_msg(environ["_CHIME_WEBHOOK_URL"], stack_send_msg("chime")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -59,8 +59,8 @@ class ExceptChime(BaseException):
         :return: Result of the decorated function call
         """
         send_chime_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="chime")["text"],
+            environ["_CHIME_WEBHOOK_URL"],
+            stack_error_msg(*args, **kwargs, "chime")["text"],
         )
 
 
@@ -89,6 +89,6 @@ class ExceptChimeIpython(BaseExceptionIpython):
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
         data = stack_error_msg(etype, evalue, tb, "chime")
-        send_chime_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        send_chime_msg(environ["_CHIME_WEBHOOK_URL"], data["text"])
 
         return None

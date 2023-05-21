@@ -4,7 +4,7 @@ from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
 from ExceptNotifier.decorators.bard_ai_decorator import handle_bard_if_available
 from ExceptNotifier.decorators.open_ai_decorator import handle_openai_if_available
-from ExceptNotifier.notifier.slack.sender import send_slack_msg
+from ExceptNotifier.apps.slack.sender import send_slack_msg
 
 
 from os import environ
@@ -23,7 +23,7 @@ class SuccessSlack(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_slack_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("slack")["text"])
+        send_slack_msg(environ["_SLACK_WEBHOOK_URL"], stack_success_msg("slack")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -40,7 +40,7 @@ class SendSlack(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_slack_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("slack")["text"])
+        send_slack_msg(environ["_SLACK_WEBHOOK_URL"], stack_send_msg("slack")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -51,7 +51,7 @@ class ExceptSlack(BaseException):
 
     @handle_openai_if_available
     @handle_bard_if_available
-    def __call__(self, *args, **kwargs):
+    def __call__(etype: object, value: object, tb: object):
         """
         Sends error message to Slack.
 
@@ -60,8 +60,8 @@ class ExceptSlack(BaseException):
         :return: Result of the decorated function call
         """
         send_slack_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="slack")["text"],
+            environ["_SLACK_WEBHOOK_URL"],
+            stack_error_msg(etype, value, tb, "slack")["text"],
         )
 
 
@@ -90,6 +90,6 @@ class ExceptSlackIpython(BaseExceptionIpython):
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
         data = stack_error_msg(etype, evalue, tb, "slack")
-        send_slack_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        send_slack_msg(environ["_SLACK_WEBHOOK_URL"], data["text"])
 
         return None

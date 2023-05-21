@@ -1,5 +1,5 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.notifier.desktop.sender import send_desktop_msg
+from ExceptNotifier.apps.desktop.sender import send_desktop_msg
 from ExceptNotifier.base.stacker.success_stacker import stack_success_msg
 from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
@@ -22,7 +22,7 @@ class SuccessDesktop(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_desktop_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("desktop")["text"])
+        send_desktop_msg(stack_success_msg("desktop")["SUBJECT"], stack_success_msg("desktop")["BODY"])
         return super().__call__(*args, **kwargs)
 
 
@@ -39,7 +39,7 @@ class SendDesktop(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_desktop_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("desktop")["text"])
+        send_desktop_msg(stack_send_msg("desktop")["SUBJECT"], stack_send_msg("desktop")["BODY"])
         return super().__call__(*args, **kwargs)
 
 
@@ -50,7 +50,7 @@ class ExceptDesktop(BaseException):
 
     @handle_openai_if_available
     @handle_bard_if_available
-    def __call__(self, *args, **kwargs):
+    def __call__(etype: object, value: object, tb: object):
         """
         Sends error message to Desktop.
 
@@ -58,10 +58,8 @@ class ExceptDesktop(BaseException):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_desktop_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="desktop")["text"],
-        )
+        error_msg = stack_error_msg(etype, value, tb, "desktop") 
+        send_desktop_msg(error_msg["SUBJECT"], error_msg["BODY"])
 
 
 class ExceptDesktopIpython(BaseExceptionIpython):
@@ -89,6 +87,6 @@ class ExceptDesktopIpython(BaseExceptionIpython):
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
         data = stack_error_msg(etype, evalue, tb, "desktop")
-        send_desktop_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        send_desktop_msg(stack_error_msg("desktop")["SUBJECT"], stack_error_msg("desktop")["BODY"])
 
         return None

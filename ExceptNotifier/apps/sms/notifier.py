@@ -60,7 +60,7 @@ class ExceptSMS(BaseException):
         """
         send_sms_msg(
             environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="sms")["text"],
+            stack_error_msg(*args, **kwargs, "sms")["text"],
         )
 
 

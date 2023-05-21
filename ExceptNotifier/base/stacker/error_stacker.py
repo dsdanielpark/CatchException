@@ -26,20 +26,20 @@ def stack_error_msg(etype, value, tb, app_name):
     if message_dict is None:
         return None
 
-    message = EmailMessage() if app_name == "gmail" else {}
-    message['TO'] = environ.get("_GAMIL_RECIPIENT_ADDR", "") if app_name == "gmail" else ""
-    message['FROM'] = environ.get("_GMAIL_SENDER_ADDR", "") if app_name == "gmail" else ""
-    message['SUBJECT'] = message_dict["SUBJECT"]
-    message['BODY'] = message_dict["BODY"] + f"\nTime Stamp: {start_time}"
+    error_message_object = EmailMessage() if app_name == "gmail" else {}
+    error_message_object['to'] = environ.get("_GAMIL_RECIPIENT_ADDR", "") if app_name == "gmail" else ""
+    error_message_object['from'] = environ.get("_GMAIL_SENDER_ADDR", "") if app_name == "gmail" else ""
+    error_message_object['subject'] = message_dict["subject"]
+    error_message_object['body'] = message_dict["body"] + f"\nTime Stamp: {start_time}"
     if app_name == "gmail":
-        message.set_content(message['BODY'])
+        error_message_object.set_content(error_message_object['body'])
 
     stack_trace = "\n".join(f'\tFile: "{line[0]}"\n\t\t{line[2]} {line[1]}: {line[3]}' for line in traceback.extract_tb(tb))
     stack = traceback.extract_stack()[:-1]
     locals_by_frame = "\n".join(f"\nFrame {frame.f_code.co_name} in {frame.f_code.co_filename} at line {frame.f_lineno}\n"
                                 + "\n".join(f"\t%20s = {val}" % key for key, val in frame.f_locals.items()) for frame in stack)
 
-    message['BODY'] += "\nLocals by frame, innermost last::::" + locals_by_frame
+    error_message_object['body'] += "\nLocals by frame, innermost last::::" + locals_by_frame
     last_frame = stack[-1].f_code if stack else None
 
     error_message = f"""
@@ -55,10 +55,14 @@ def stack_error_msg(etype, value, tb, app_name):
     advice_msg = stack_trace[-1] if stack_trace else ""
 
     data = {
-        "text": message["SUBJECT"] + message["BODY"] if app_name != "gmail" else None,
+        "to": error_message_object['to'],
+        "from" : error_message_object['from'],
+        "subject": error_message_object["subject"],
+        "body": error_message_object["body"],
+        "text": error_message_object["subject"] + error_message_object["body"] if app_name != "gmail" else None,
         "error_message": error_message,
         "advice_msg": advice_msg,
-        "message_dict": message if app_name == "gmail" else message["SUBJECT"] + message["BODY"],
+        "message_dict": error_message_object if app_name == "gmail" else error_message_object["subject"] + error_message_object["body"],
     }
 
     return data

@@ -31,9 +31,9 @@ def send_mail_msg(
         smtp.login(gmail_sender_address, gamil_app_pw_of_sender)
         message = EmailMessage()
         message.set_content(body_msg)
-        message["Subject"] = subject_msg
-        message["From"] = gmail_sender_address
-        message["To"] = gmail_recipient_address
+        message["subject"] = subject_msg
+        message["from"] = gmail_sender_address
+        message["to"] = gmail_recipient_address
         resp = smtp.send_message(message)
 
     return resp

@@ -1,5 +1,5 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.notifier.teams.sender import send_teams_msg
+from ExceptNotifier.apps.teams.sender import send_teams_msg
 from ExceptNotifier.base.stacker.success_stacker import stack_success_msg
 from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
@@ -22,7 +22,7 @@ class SuccessTeams(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_teams_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("teams")["text"])
+        send_teams_msg(environ["_TEAMS_WEBHOOK_URL"], stack_success_msg("teams")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -39,7 +39,7 @@ class SendTeams(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_teams_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("teams")["text"])
+        send_teams_msg(environ["_TEAMS_WEBHOOK_URL"], stack_send_msg("teams")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -50,7 +50,7 @@ class ExceptTeams(BaseException):
 
     @handle_openai_if_available
     @handle_bard_if_available
-    def __call__(self, *args, **kwargs):
+    def __call__(etype: object, value: object, tb: object):
         """
         Sends error message to Teams.
 
@@ -59,8 +59,8 @@ class ExceptTeams(BaseException):
         :return: Result of the decorated function call
         """
         send_teams_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="teams")["text"],
+            environ["_TEAMS_WEBHOOK_URL"],
+            stack_error_msg(etype, value, tb, "teams")["text"],
         )
 
 
@@ -89,6 +89,6 @@ class ExceptTeamsIpython(BaseExceptionIpython):
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
         data = stack_error_msg(etype, evalue, tb, "teams")
-        send_teams_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        send_teams_msg(environ["_TEAMS_WEBHOOK_URL"], data["text"])
 
         return None

@@ -23,14 +23,15 @@ def stack_send_msg(app_name: str) -> Optional[EmailMessage]:
     if send_message is None:
         return None
 
-    send_message["BODY"] += f"- Time: {start_time}"
+    send_message["body"] += f"- Time: {start_time}"
 
     if app_name == "gmail":
         send_message_obj = EmailMessage()
-        send_message_obj.set_content(send_message["BODY"])
-        send_message_obj["Subject"] = send_message["SUBJECT"]
-        send_message_obj["From"] = environ.get("_GMAIL_SENDER_ADDR", "")
-        send_message_obj["To"] = environ.get("_GAMIL_RECIPIENT_ADDR", "")
+        send_message_obj.set_content(send_message["body"])
+        send_message_obj["subject"] = send_message["subject"]
+        send_message_obj["from"] = environ.get("_GMAIL_SENDER_ADDR", "")
+        send_message_obj["to"] = environ.get("_GAMIL_RECIPIENT_ADDR", "")
+        send_message_obj["app_password"] = environ.get("_GMAIL_APP_PASSWORD_OF_SENDER", "")
         return send_message_obj
 
-    return generate_message(send_message["SUBJECT"], send_message["BODY"])
+    return generate_message(send_message["subject"], send_message["body"])

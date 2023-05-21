@@ -20,15 +20,20 @@ def stack_success_msg(app_name: str) -> Optional[EmailMessage]:
     message_dict = SUCCESS_TEMPLATE.get(app_name)
 
     if app_name == "gmail":
-        message = EmailMessage()
-        message.set_content(message_dict["BODY"])
-        message["Subject"] = message_dict["SUBJECT"]
-        message["From"] = environ.get("_GMAIL_SENDER_ADDR", "")
-        message["To"] = environ.get("_GAMIL_RECIPIENT_ADDR", "")
-        return message
+        success_message_obj = EmailMessage()
+        success_message_obj.set_content(message_dict["body"])
+        success_message_obj["subject"] = message_dict["subject"]
+        success_message_obj["from"] = environ.get("_GMAIL_SENDER_ADDR", "")
+        success_message_obj["to"] = environ.get("_GAMIL_RECIPIENT_ADDR", "")
+        success_message_obj["app_password"] = environ.get("_GMAIL_APP_PASSWORD_OF_SENDER", "")
+        return success_message_obj
+    
+    elif app_name == "desktop":
+        message_dict["body"] += f"\n - Time: {start_time}"
+        return message_dict
 
     if message_dict:
-        message_dict["BODY"] += f"\n - Time: {start_time}"
-        return generate_message(message_dict["SUBJECT"], message_dict["BODY"])
+        message_dict["body"] += f"\n - Time: {start_time}"
+        return generate_message(message_dict["subject"], message_dict["body"])
 
     return None

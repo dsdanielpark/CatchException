@@ -1,5 +1,5 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.notifier.whatsapp.sender import send_whatsapp_msg
+from ExceptNotifier.apps.whatsapp.sender import send_whatsapp_msg
 from ExceptNotifier.base.stacker.success_stacker import stack_success_msg
 from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
@@ -22,7 +22,7 @@ class SuccessWhatsapp(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_whatsapp_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("whatsapp")["text"])
+        send_whatsapp_msg(environ["_WHATSAPP_TOKEN"], stack_success_msg("whatsapp")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -39,7 +39,7 @@ class SendWhatsapp(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_whatsapp_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("whatsapp")["text"])
+        send_whatsapp_msg(environ["_WHATSAPP_TOKEN"], stack_send_msg("whatsapp")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -50,7 +50,7 @@ class ExceptWhatsapp(BaseException):
 
     @handle_openai_if_available
     @handle_bard_if_available
-    def __call__(self, *args, **kwargs):
+    def __call__(etype: object, value: object, tb: object):
         """
         Sends error message to Whatsapp.
 
@@ -59,8 +59,8 @@ class ExceptWhatsapp(BaseException):
         :return: Result of the decorated function call
         """
         send_whatsapp_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="whatsapp")["text"],
+            environ["_WHATSAPP_TOKEN"],
+            stack_error_msg(etype, value, tb, "whatsapp")["text"],
         )
 
 
@@ -89,6 +89,6 @@ class ExceptWhatsappIpython(BaseExceptionIpython):
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
         data = stack_error_msg(etype, evalue, tb, "whatsapp")
-        send_whatsapp_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        send_whatsapp_msg(environ["_WHATSAPP_TOKEN"], data["text"])
 
         return None

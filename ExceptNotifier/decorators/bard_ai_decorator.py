@@ -11,9 +11,9 @@ def handle_bard_if_available(func):
             try:
                 bard_advice = receive_bard_advice(
                     environ["_BARD_API_KEY"],
-                    stack_error_msg(*args, **kwargs, handler_name="telegram")["advice_msg"],
+                    stack_error_msg(*args, **kwargs, "telegram")["advice_msg"],
                 )
-                send_telegram_msg(environ["_TELEGRAM_TOKEN"], stack_error_msg(*args, **kwargs, handler_name="telegram")["advice_msg"] + bard_advice)
+                send_telegram_msg(environ["_TELEGRAM_TOKEN"], stack_error_msg(*args, **kwargs, "telegram")["advice_msg"] + bard_advice)
             except Exception as e:
                 print(f"Response error during getting advice from Bard: {e}")
                 print("Insufficient variables set to receive debugging info from Google Bard.")

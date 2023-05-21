@@ -4,7 +4,7 @@ from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
 from ExceptNotifier.decorators.bard_ai_decorator import handle_bard_if_available
 from ExceptNotifier.decorators.open_ai_decorator import handle_openai_if_available
-from ExceptNotifier.notifier.mail.sender import send_mail_msg
+from ExceptNotifier.apps.mail.sender import send_mail_msg
 
 
 from os import environ
@@ -23,7 +23,8 @@ class SuccessMail(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_mail_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("mail")["text"])
+        success_msg = stack_success_msg("mail")
+        send_mail_msg(success_msg["from"], success_msg["to"], success_msg["app_password"], success_msg["subject"],  success_msg["body"])
         return super().__call__(*args, **kwargs)
 
 
@@ -40,7 +41,8 @@ class SendMail(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_mail_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("mail")["text"])
+        send_msg = stack_success_msg("mail")
+        send_mail_msg(send_msg["from"], send_msg["to"], send_msg["app_password"], send_msg["subject"],  send_msg["body"])
         return super().__call__(*args, **kwargs)
 
 
@@ -59,10 +61,8 @@ class ExceptMail(BaseException):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_mail_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="mail")["text"],
-        )
+        error_msg = stack_success_msg("mail")
+        send_mail_msg(error_msg["from"], error_msg["to"], error_msg["app_password"], error_msg["subject"],  error_msg["body"])
 
 
 class ExceptMailIpython(BaseExceptionIpython):
@@ -89,7 +89,7 @@ class ExceptMailIpython(BaseExceptionIpython):
         :type tb_offset: int, optional
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
-        data = stack_error_msg(etype, evalue, tb, "mail")
-        send_mail_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        error_msg = stack_success_msg("mail")
+        send_mail_msg(error_msg["from"], error_msg["to"], error_msg["app_password"], error_msg["subject"],  error_msg["body"])
 
         return None

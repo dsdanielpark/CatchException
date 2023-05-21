@@ -1,5 +1,5 @@
 from ExceptNotifier.base.notifier import BaseSuccessHandler, BaseSendHandler, BaseExceptionIpython
-from ExceptNotifier.notifier.discord.sender import send_discord_msg
+from ExceptNotifier.apps.discord.sender import send_discord_msg
 from ExceptNotifier.base.stacker.success_stacker import stack_success_msg
 from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
@@ -22,7 +22,7 @@ class SuccessDiscord(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_discord_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("discord")["text"])
+        send_discord_msg(environ["_DISCORD_WEBHOOK_URL"], stack_success_msg("discord")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -39,7 +39,7 @@ class SendDiscord(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_discord_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("discord")["text"])
+        send_discord_msg(environ["_DISCORD_WEBHOOK_URL"], stack_send_msg("discord")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -50,7 +50,7 @@ class ExceptDiscord(BaseException):
 
     @handle_openai_if_available
     @handle_bard_if_available
-    def __call__(self, *args, **kwargs):
+    def __call__(etype: object, value: object, tb: object):
         """
         Sends error message to Discord.
 
@@ -59,8 +59,8 @@ class ExceptDiscord(BaseException):
         :return: Result of the decorated function call
         """
         send_discord_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="discord")["text"],
+            environ["_DISCORD_WEBHOOK_URL"],
+            stack_error_msg(etype, value, tb, "discord")["text"],
         )
 
 
@@ -89,6 +89,6 @@ class ExceptDiscordIpython(BaseExceptionIpython):
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
         data = stack_error_msg(etype, evalue, tb, "discord")
-        send_discord_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        send_discord_msg(environ["_DISCORD_WEBHOOK_URL"], data["text"])
 
         return None

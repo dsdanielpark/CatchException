@@ -4,7 +4,7 @@ from ExceptNotifier.base.stacker.send_stacker import stack_send_msg
 from ExceptNotifier.base.stacker.error_stacker import stack_error_msg
 from ExceptNotifier.decorators.bard_ai_decorator import handle_bard_if_available
 from ExceptNotifier.decorators.open_ai_decorator import handle_openai_if_available
-from ExceptNotifier.notifier.kakaotalk.sender import send_kakaotalk_msg
+from ExceptNotifier.apps.kakaotalk.sender import send_kakaotalk_msg
 
 
 from os import environ
@@ -23,7 +23,7 @@ class SuccessKakaotalk(BaseSuccessHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_kakaotalk_msg(environ["_TELEGRAM_TOKEN"], stack_success_msg("kakaotalk")["text"])
+        send_kakaotalk_msg(environ["_KAKAO_TOKEN_PATH"], stack_success_msg("kakaotalk")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -40,7 +40,7 @@ class SendKakaotalk(BaseSendHandler):
         :param kwargs: Keyword arguments
         :return: Result of the decorated function call
         """
-        send_kakaotalk_msg(environ["_TELEGRAM_TOKEN"], stack_send_msg("kakaotalk")["text"])
+        send_kakaotalk_msg(environ["_KAKAO_TOKEN_PATH"], stack_send_msg("kakaotalk")["text"])
         return super().__call__(*args, **kwargs)
 
 
@@ -51,7 +51,7 @@ class ExceptKakaotalk(BaseException):
 
     @handle_openai_if_available
     @handle_bard_if_available
-    def __call__(self, *args, **kwargs):
+    def __call__(etype: object, value: object, tb: object):
         """
         Sends error message to Kakaotalk.
 
@@ -60,8 +60,8 @@ class ExceptKakaotalk(BaseException):
         :return: Result of the decorated function call
         """
         send_kakaotalk_msg(
-            environ["_TELEGRAM_TOKEN"],
-            stack_error_msg(*args, **kwargs, handler_name="kakaotalk")["text"],
+            environ["_KAKAO_TOKEN_PATH"],
+            stack_error_msg(etype, value, tb, "kakaotalk")["text"],
         )
 
 
@@ -90,6 +90,6 @@ class ExceptKakaotalkIpython(BaseExceptionIpython):
         """
         shell.showtraceback((etype, evalue, tb), tb_offset=tb_offset)
         data = stack_error_msg(etype, evalue, tb, "kakaotalk")
-        send_kakaotalk_msg(environ["_TELEGRAM_TOKEN"], data["text"])
+        send_kakaotalk_msg(environ["_KAKAO_TOKEN_PATH"], data["text"])
 
         return None
