@@ -1,6 +1,6 @@
 
 
-send_message_template = {
+SEND_MESSAGE_TEMPLATE = {
     "telegram": {
         "SUBJECT": "[Codeline Notifier] 👏 Notice! Code Execution Reached Specified Line",
         "BODY": "Hi there,\n\nThis is a customized notifier.\n\n"

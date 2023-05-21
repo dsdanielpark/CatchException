@@ -1,5 +1,5 @@
 
-error_message_template = {
+ERROR_MESSAGE_TEMPLATE = {
     "gmail": {
         "SUBJECT": "[Except Notifier] Error! Python Code Exception Detected",
         "BODY": "IMPORTANT WARNING: \nPython Exception Detected in Your Code. \n\n"

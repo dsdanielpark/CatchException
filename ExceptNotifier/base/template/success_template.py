@@ -1,5 +1,5 @@
 
-success_message_template = {
+SUCCESS_MESSAGE_TEMPLATE = {
     "telegram": {
         "SUBJECT": "[Success Notifier] 🎉 Success! Python Code Executed Successfully",
         "BODY": "\n\nHi there,\nThis is a success notifier."

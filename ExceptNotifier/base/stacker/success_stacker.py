@@ -3,7 +3,7 @@ from email.message import EmailMessage
 from typing import Optional
 from ExceptNotifier.base.utils.time_stamper import get_timestamp
 from ExceptNotifier.base.utils.message_generator import generate_message
-from ExceptNotifier.base.template.success_template import success_message_template as successmsgtemplate
+from ExceptNotifier.base.template.success_template import SUCCESS_MESSAGE_TEMPLATE as SUCCESS_TEMPLATE
 
 
 def stack_success_msg(app_name: str) -> Optional[EmailMessage]:
@@ -17,7 +17,7 @@ def stack_success_msg(app_name: str) -> Optional[EmailMessage]:
         EmailMessage: The success message as an EmailMessage object, or None if app_name is not found in the dictionary.
     """
     start_time = get_timestamp()
-    message_dict = successmsgtemplate.get(app_name)
+    message_dict = SUCCESS_TEMPLATE.get(app_name)
 
     if app_name == "gmail":
         message = EmailMessage()

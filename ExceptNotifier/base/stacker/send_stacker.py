@@ -3,7 +3,7 @@ from ExceptNotifier.base.utils.message_generator import generate_message
 from email.message import EmailMessage
 from os import environ
 from typing import Optional
-from ExceptNotifier.base.template.send_template import send_message_template as sendmsgtemplate
+from ExceptNotifier.base.template.send_template import SEND_MESSAGE_TEMPLATE as SEND_TEMPLATE
 
 
 def stack_send_msg(app_name: str) -> Optional[EmailMessage]:
@@ -19,7 +19,7 @@ def stack_send_msg(app_name: str) -> Optional[EmailMessage]:
     start_time = get_timestamp()
 
 
-    send_message = sendmsgtemplate.get(app_name)
+    send_message = SEND_TEMPLATE.get(app_name)
     if send_message is None:
         return None
 
