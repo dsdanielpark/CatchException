@@ -1,5 +1,5 @@
 import sys
-from ExceptNotifier.teams import ExceptTeamsIpython, ExceptTeams
+from ExceptNotifier.apps.teams.notifier import ExceptTeamsIpython, ExceptTeams
 
 except_teams = ExceptTeamsIpython()
 
