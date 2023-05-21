@@ -15,11 +15,15 @@ In preparation for the beta release, the package architecture is overhauled. Tes
 Applies to [ExceptNotifier](https://github.com/dsdanielpark/ExceptNotifier) after QA.
 
 
-# Remark
-Refactoring was delayed for the following reasons:
-- The functional implementation, documentation, and example writing for most applications were completed by a single developer([@dsdanielpark](https://github.com/dsdanielpark)) in just 7 days. 
-- I also released all realted package([BardAPI](https://github.com/dsdanielpark/Bard-API)), sub-package([Co-Coder](https://github.com/dsdanielpark/Co-Coder)), and prompt engineering GitHub resources([Amazing-Bard-prompts](https://github.com/dsdanielpark/amazing-bard-prompts)) for implementing Google Bard into [ExceptNotifier](https://github.com/dsdanielpark/ExceptNotifier)  within 3 days. 
-- Due to commitments to other live projects and competitions, I have limited time. 
-- As time allows, I plan to refactor, conduct QA for each application, and distribute the package. 
-- Once the package structure is finalized, I intend to recruit contributors for each application.
-<br>
+# Note 
+The refactoring process was delayed for the following reasons:
+
+Firstly, a single developer [(@dsdanielpark)](https://github.com/dsdanielpark) completed the functional implementation, documentation, and example writing for most applications in just 7 days.
+
+In addition, I released all related packages [BardAPI](https://github.com/dsdanielpark/Bard-API), [Co-Coder](https://github.com/dsdanielpark/Co-Coder), and prompt engineering GitHub resources [Amazing-Bard-prompts](https://github.com/dsdanielpark/amazing-bard-prompts) for implementing Google Bard into ExceptNotifier within 3 days.
+
+However, due to commitments to other live projects and competitions, I have limited time available.
+
+As time permits, I plan to proceed with the refactoring process, conduct quality assurance for each application, and distribute the package.
+
+Once the package structure is finalized, my intention is to recruit contributors for each application.
