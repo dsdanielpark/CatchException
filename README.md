@@ -15,7 +15,7 @@ In preparation for the beta release, the package architecture is overhauled. Tes
 Applies to [ExceptNotifier](https://github.com/dsdanielpark/ExceptNotifier) after QA.
 
 ## Notice
-This repository serves the purpose of discussing various structures and testing new features without officially distributing the package or compromising the integrity of the ExceptNotifier repository. And if desired, feel free to increment the version and distribute it. However, after updating the version, please provide a description of the changes in the following RELEASE_NOTE. Thank you.
+This repository serves the purpose of discussing various structures and testing new features without officially distributing the package or compromising the integrity of the ExceptNotifier repository. And if desired, feel free to increment the version and distribute it. However, after updating the version, please provide a description of the changes in the following [RELEASE_NOTE](https://github.com/dsdanielpark/CatchException/blob/main/documents/RELEASE_NOTE.md). Thank you.
 
 Pull Requests that may not functionally work are also accepted, as the main focus is on ideas and potential improvements.
 
