@@ -9,4 +9,4 @@ Feel free to request a deployment for testing purposes. Here is a brief summary 
 - I have made changes to the overall structure to align it with the guidelines. 
 - Some functionalities have been tested. 
 - modifications to decorators and other elements are still required.
-- I was unable to perform comprehensive testing of all functionalities due to time constraints. (Please contribute and help me)
+- I was unable to perform comprehensive testing of all functionalities due to time constraints.
